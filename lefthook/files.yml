@@ -3,18 +3,18 @@ pre-commit:
   commands:
     trailing-whitespace:
       glob: "**/*.{yaml,yml,md,json}"
-      run: task hooks:trailing-whitespace
+      run: mise run hooks:trailing-whitespace
       fail_text: "trailing whitespace found"
 
     end-of-file:
       glob: "**/*.{yaml,yml,md,json}"
-      run: task hooks:end-of-file
+      run: mise run hooks:end-of-file
       fail_text: "files must end with newline"
 
     check-large-files:
-      run: task hooks:check-large-files
+      run: mise run hooks:check-large-files
       fail_text: "file exceeds 500KB limit"
 
     check-merge-conflict:
-      run: task hooks:check-merge-conflict
+      run: mise run hooks:check-merge-conflict
       fail_text: "merge conflict markers found"

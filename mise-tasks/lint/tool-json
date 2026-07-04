@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+#MISE description="Validate tool.json"
+set -euo pipefail
+
+jq empty tool.json
+for field in name upstream description; do
+  value=$(jq -r ".${field}" tool.json)
+  if [ "$value" = "null" ] || [ -z "$value" ]; then
+    echo "ERROR: Missing required field '${field}' in tool.json"
+    exit 1
+  fi
+done
+echo "tool.json is valid"

@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+#MISE description="Validate commit message follows Conventional Commits"
+set -euo pipefail
+
+cog verify --file "$1"

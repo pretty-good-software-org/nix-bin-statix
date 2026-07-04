@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+#MISE description="Run all linters"
+set -euo pipefail
+
+mise run lint:actionlint
+mise run lint:yamllint
+mise run lint:tool-json

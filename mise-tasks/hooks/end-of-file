@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+#MISE description="Check files end with newline"
+set -euo pipefail
+
+fail=0
+for f in $(git diff --cached --diff-filter=d --name-only); do
+  if [ -s "$f" ] && [ -n "$(tail -c 1 "$f")" ]; then
+    echo "$f: no newline at end of file"
+    fail=1
+  fi
+done
+exit $fail

@@ -1,5 +1,5 @@
 commit-msg:
   commands:
     cocogitto:
-      run: task hooks:commit-msg -- {1}
+      run: mise run hooks:commit-msg -- {1}
       fail_text: "commit message does not follow Conventional Commits"
