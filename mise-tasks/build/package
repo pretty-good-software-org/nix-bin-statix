@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+#MISE description="Package binary as tarball with sha256 checksum"
+set -euo pipefail
+
+TOOL_NAME="${TOOL_NAME:?TOOL_NAME is required}"
+TARGET="${TARGET:?TARGET is required}"
+
+ARCHIVE="${TOOL_NAME}-${TARGET}.tar.gz"
+cd dist/bin
+tar czf "../../${ARCHIVE}" "${TOOL_NAME}"
+cd ../..
+shasum -a 256 "${ARCHIVE}" > "${ARCHIVE}.sha256"

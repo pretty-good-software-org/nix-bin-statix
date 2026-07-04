@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+#MISE description="Check for merge conflict markers"
+set -euo pipefail
+
+if git diff --cached --diff-filter=d --name-only | xargs grep -Hn '^<<<<<<< |^=======$|^>>>>>>> ' 2>/dev/null; then
+  echo "Merge conflict markers found"
+  exit 1
+fi

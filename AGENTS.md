@@ -59,9 +59,9 @@ All workflows use `jdx/mise-action@v3` for tool installation and delegate logic 
 
 | Workflow | Trigger | Purpose |
 |----------|---------|---------|
-| `build.yml` | `workflow_dispatch` with version input | Orchestrates `task build:*` — cross-compile, package, release |
-| `check-upstream.yml` | Weekly cron + `workflow_dispatch` | Runs `task check-upstream` — compare upstream vs ours, create issue |
-| `lint.yml` | PR + push to main | Runs `task lint` — actionlint, yamllint, tool.json validation |
+| `build.yml` | `workflow_dispatch` with version input | Orchestrates `mise run build:*` — cross-compile, package, release |
+| `check-upstream.yml` | Weekly cron + `workflow_dispatch` | Runs `mise run check-upstream` — compare upstream vs ours, create issue |
+| `lint.yml` | PR + push to main | Runs `mise run lint` — actionlint, yamllint, tool.json validation |
 
 ### Build Targets
 
@@ -77,7 +77,7 @@ All workflows use `jdx/mise-action@v3` for tool installation and delegate logic 
 
 | File | Purpose | Tools |
 |------|---------|-------|
-| `.mise.toml` | Base (always loaded) | task, actionlint, yamllint, jq |
+| `.mise.toml` | Base (always loaded) | actionlint, yamllint, jq |
 | `.mise.development.toml` | Dev-only (local) | lefthook, node |
 | `.mise.ci.toml` | CI profile (empty) | Inherits base only |
 | `.miserc.toml` | Sets default env | `env = ["development"]` |

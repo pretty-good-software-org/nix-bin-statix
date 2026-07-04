@@ -20,4 +20,4 @@ jobs:
           MISE_ENV: ci
 
       - name: Run linters
-        run: task lint
+        run: mise run lint

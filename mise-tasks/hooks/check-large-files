@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+#MISE description="Check staged files are under 500KB"
+set -euo pipefail
+
+MAX_KB=500
+fail=0
+for f in $(git diff --cached --diff-filter=d --name-only); do
+  size=$(wc -c < "$f" 2>/dev/null || echo 0)
+  if [ "$size" -gt $((MAX_KB * 1024)) ]; then
+    echo "$f exceeds ${MAX_KB}KB"
+    fail=1
+  fi
+done
+exit $fail

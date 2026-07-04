@@ -24,7 +24,7 @@ jobs:
           MISE_ENV: ci
 
       - name: Check for new upstream release
-        run: task check-upstream
+        run: mise run check-upstream
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITHUB_REPOSITORY: ${{ github.repository }}

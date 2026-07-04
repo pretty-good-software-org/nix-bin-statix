@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+#MISE description="Check for trailing whitespace"
+set -euo pipefail
+
+if git diff --cached --diff-filter=d --name-only | xargs grep -Hn '[[:blank:]]$' 2>/dev/null; then
+  echo "Trailing whitespace found"
+  exit 1
+fi

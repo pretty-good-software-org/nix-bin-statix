@@ -1,0 +1,33 @@
+#!/usr/bin/env bash
+#MISE description="Compile tool from crates.io or git"
+set -euo pipefail
+
+VERSION="${VERSION:?VERSION is required}"
+TARGET="${TARGET:?TARGET is required}"
+
+SOURCE=$(jq -r '.source // "crate"' tool.json)
+if [ "$SOURCE" = "git" ]; then
+  UPSTREAM_URL=$(jq -r .upstream tool.json)
+  cargo install \
+    --git "${UPSTREAM_URL}" \
+    --tag "v${VERSION}" \
+    --target "${TARGET}" \
+    --root ./dist \
+    --locked || \
+  cargo install \
+    --git "${UPSTREAM_URL}" \
+    --tag "v${VERSION}" \
+    --target "${TARGET}" \
+    --root ./dist
+else
+  CRATE=$(jq -r .crate tool.json)
+  cargo install "${CRATE}" \
+    --version "${VERSION}" \
+    --target "${TARGET}" \
+    --root ./dist \
+    --locked || \
+  cargo install "${CRATE}" \
+    --version "${VERSION}" \
+    --target "${TARGET}" \
+    --root ./dist
+fi
