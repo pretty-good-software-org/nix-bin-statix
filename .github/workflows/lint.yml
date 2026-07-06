@@ -10,14 +10,10 @@ jobs:
     name: Lint
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-
-      - uses: jdx/mise-action@v3
+      - name: Setup
+        uses: pretty-good-software-org/ci-shared/actions/setup/mise@v1
         with:
-          install: true
-          cache: true
-        env:
-          MISE_ENV: ci
+          mise-env: ci
 
       - name: Run linters
         run: mise run lint
