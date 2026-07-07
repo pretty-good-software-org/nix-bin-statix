@@ -1,5 +1,5 @@
 [tools]
 cocogitto = "6"
-actionlint = "latest"
-yamllint = "latest"
-jq = "latest"
+actionlint = "1.7.12"
+yamllint = "1.38.0"
+jq = "1.8.2"
