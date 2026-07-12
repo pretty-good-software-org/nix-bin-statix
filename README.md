@@ -31,6 +31,9 @@ Prerequisites: [mise](https://mise.jdx.dev/)
 # Install tools and git hooks
 task setup
 
+# Add a changelog entry
+task changie
+
 # Run all linters (actionlint + yamllint + tool.json validation)
 task lint
 ```
