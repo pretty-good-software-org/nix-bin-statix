@@ -5,6 +5,9 @@ on:
     - cron: "0 8 * * 1"
   workflow_dispatch:
 
+env:
+  MISE_ENV: ci
+
 permissions:
   contents: read
   issues: write
@@ -20,8 +23,6 @@ jobs:
         with:
           install: true
           cache: true
-        env:
-          MISE_ENV: ci
 
       - name: Check for new upstream release
         run: mise run check-upstream

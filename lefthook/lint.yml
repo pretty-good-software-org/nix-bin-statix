@@ -11,6 +11,16 @@ pre-commit:
       run: mise run lint:yamllint
       fail_text: "yamllint found issues"
 
+    markdown-format:
+      glob: "**/*.md"
+      run: mdformat --check {staged_files}
+      fail_text: "mdformat found formatting issues"
+
+    markdownlint:
+      glob: "**/*.md"
+      run: markdownlint-cli2 {staged_files}
+      fail_text: "markdownlint found issues"
+
     tool-json:
       glob: "tool.json"
       run: mise run lint:tool-json

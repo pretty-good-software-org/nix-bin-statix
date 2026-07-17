@@ -5,6 +5,9 @@ on:
   push:
     branches: [main]
 
+env:
+  MISE_ENV: ci
+
 jobs:
   lint:
     name: Lint
@@ -16,8 +19,6 @@ jobs:
         with:
           install: true
           cache: true
-        env:
-          MISE_ENV: ci
 
       - name: Run linters
         run: mise run lint

@@ -84,6 +84,37 @@ url = "https://github.com/jqlang/jq/releases/download/jq-1.8.2/jq-macos-arm64"
 checksum = "sha256:e94b266e3c26690550006abe63152b782280f4e14374accdf04cbde844f00bc0"
 url = "https://github.com/jqlang/jq/releases/download/jq-1.8.2/jq-macos-amd64"
 
+[[tools.markdownlint-cli2]]
+version = "0.22.0"
+backend = "npm:markdownlint-cli2"
+
+[[tools."pipx:mdformat"]]
+version = "1.0.0"
+backend = "pipx:mdformat"
+
+[tools."pipx:mdformat".options]
+uvx_args = "--with-requirements mdformat-requirements.lock"
+
+[[tools.uv]]
+version = "0.11.26"
+backend = "aqua:astral-sh/uv"
+
+[tools.uv."platforms.linux-arm64"]
+checksum = "sha256:47418cfdb34b1ca42e503da72631ac8c475602e2411ac6c39aa84c2373fe6324"
+url = "https://github.com/astral-sh/uv/releases/download/0.11.26/uv-aarch64-unknown-linux-musl.tar.gz"
+
+[tools.uv."platforms.linux-x64"]
+checksum = "sha256:62bf1a53501adf4083224b69b33737450ac516935f5a5e483e9dfaf2665084de"
+url = "https://github.com/astral-sh/uv/releases/download/0.11.26/uv-x86_64-unknown-linux-musl.tar.gz"
+
+[tools.uv."platforms.macos-arm64"]
+checksum = "sha256:8f7fbf1708399b921857bce71e1d60f0d3ccf52a30caebc1c1a2f175dce13ab6"
+url = "https://github.com/astral-sh/uv/releases/download/0.11.26/uv-aarch64-apple-darwin.tar.gz"
+
+[tools.uv."platforms.macos-x64"]
+checksum = "sha256:922b460202707dd5f4ccacbadbe7f6a546cc46e82a99bf50ca99a7977a78eddd"
+url = "https://github.com/astral-sh/uv/releases/download/0.11.26/uv-x86_64-apple-darwin.tar.gz"
+
 [[tools.yamllint]]
 version = "1.38.0"
 backend = "pipx:yamllint"

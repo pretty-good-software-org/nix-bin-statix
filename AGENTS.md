@@ -8,11 +8,13 @@ This file provides guidance to Claude Code when working with code in this reposi
 
 ## Repository Overview
 
-Prebuilt [statix](https://github.com/nerdypepper/statix) binaries published as GitHub Releases. Cross-compiles for macOS (arm64, x86_64) and Linux (x86_64, arm64), installable via mise's `github:` backend. Builds from git (not crates.io) because statix is not published as a crate.
+Prebuilt [statix](https://github.com/nerdypepper/statix) binaries published as GitHub Releases. Cross-compiles for macOS
+(arm64, x86_64) and Linux (x86_64, arm64), installable via mise's `github:` backend. Builds from git (not crates.io)
+because statix is not published as a crate.
 
 ## Repository Structure
 
-```
+```text
 nix-statix-bin
 ├── .github
 │   └── workflows
@@ -57,30 +59,30 @@ Note: `source: "git"` means the compile task builds from the upstream git repo i
 
 All workflows use `jdx/mise-action@v3` for tool installation and delegate logic to Taskfile tasks.
 
-| Workflow | Trigger | Purpose |
-|----------|---------|---------|
-| `build.yml` | `workflow_dispatch` with version input | Orchestrates `mise run build:*` — cross-compile, package, release |
-| `check-upstream.yml` | Weekly cron + `workflow_dispatch` | Runs `mise run check-upstream` — compare upstream vs ours, create issue |
-| `lint.yml` | PR + push to main | Runs `mise run lint` — actionlint, yamllint, tool.json validation |
+| Workflow             | Trigger                                | Purpose                                                                 |
+| -------------------- | -------------------------------------- | ----------------------------------------------------------------------- |
+| `build.yml`          | `workflow_dispatch` with version input | Orchestrates `mise run build:*` — cross-compile, package, release       |
+| `check-upstream.yml` | Weekly cron + `workflow_dispatch`      | Runs `mise run check-upstream` — compare upstream vs ours, create issue |
+| `lint.yml`           | PR + push to main                      | Runs `mise run lint` — actionlint, yamllint, tool.json validation       |
 
 ### Build Targets
 
-| Target | Runner | Architecture |
-|--------|--------|-------------|
-| `aarch64-apple-darwin` | `macos-14` | macOS arm64 |
-| `x86_64-unknown-linux-gnu` | `ubuntu-latest` | Linux x86_64 |
-| `aarch64-unknown-linux-gnu` | `ubuntu-latest` (cross) | Linux arm64 |
+| Target                      | Runner                  | Architecture |
+| --------------------------- | ----------------------- | ------------ |
+| `aarch64-apple-darwin`      | `macos-14`              | macOS arm64  |
+| `x86_64-unknown-linux-gnu`  | `ubuntu-latest`         | Linux x86_64 |
+| `aarch64-unknown-linux-gnu` | `ubuntu-latest` (cross) | Linux arm64  |
 
 ## Dev Tooling
 
 ### mise (Tool Version Management)
 
-| File | Purpose | Tools |
-|------|---------|-------|
-| `.mise.toml` | Base (always loaded) | actionlint, yamllint, jq |
-| `.mise.development.toml` | Dev-only (local) | lefthook, node |
-| `.mise.ci.toml` | CI profile (empty) | Inherits base only |
-| `.miserc.toml` | Sets default env | `env = ["development"]` |
+| File                     | Purpose              | Tools                    |
+| ------------------------ | -------------------- | ------------------------ |
+| `.mise.toml`             | Base (always loaded) | actionlint, yamllint, jq |
+| `.mise.development.toml` | Dev-only (local)     | lefthook, node           |
+| `.mise.ci.toml`          | CI profile (empty)   | Inherits base only       |
+| `.miserc.toml`           | Sets default env     | `env = ["development"]`  |
 
 ### Taskfile
 
@@ -95,10 +97,10 @@ task check-upstream     # Check for new upstream releases (needs GH_TOKEN, GITHU
 
 ### lefthook (Git Hooks)
 
-| Hook | Checks |
-|------|--------|
+| Hook         | Checks                                                                                                  |
+| ------------ | ------------------------------------------------------------------------------------------------------- |
 | `pre-commit` | Trailing whitespace, end-of-file newline, large files, merge conflicts, actionlint, yamllint, tool.json |
-| `commit-msg` | Conventional commits via commitlint |
+| `commit-msg` | Conventional commits via commitlint                                                                     |
 
 ## Conventions
 
