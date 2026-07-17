@@ -11,6 +11,9 @@ on:
 permissions:
   contents: write
 
+env:
+  MISE_ENV: ci
+
 jobs:
   build:
     strategy:
@@ -32,8 +35,6 @@ jobs:
         with:
           install: true
           cache: true
-        env:
-          MISE_ENV: ci
 
       - name: Read tool config
         id: config
@@ -81,8 +82,6 @@ jobs:
         with:
           install: true
           cache: true
-        env:
-          MISE_ENV: ci
 
       - name: Read tool config
         id: config
