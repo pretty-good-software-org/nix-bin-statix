@@ -20,5 +20,11 @@ jobs:
           install: true
           cache: true
 
+      - name: Run mdformat lifecycle tests
+        run: mise run test:mdformat
+
+      - name: Run mdformat reader tests
+        run: mise run test:mdformat-readers
+
       - name: Run linters
         run: mise run lint
