@@ -1,3 +1,4 @@
+---
 pre-commit:
   parallel: true
   commands:
@@ -14,7 +15,8 @@ pre-commit:
     markdown-format:
       glob: "**/*.md"
       run: >-
-        bash -c 'source mise-tasks/setup/mdformat-env && mise run setup:mdformat &&
+        bash -c 'source mise-tasks/setup/mdformat-env &&
+        mise run setup:mdformat &&
         "$MISE_MDFORMAT_ENV_DIR/bin/mdformat" --check "$@"' -- {staged_files}
       fail_text: "mdformat found formatting issues"
 

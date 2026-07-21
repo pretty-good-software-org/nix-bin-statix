@@ -1,2 +1,4 @@
 extends:
-  - lefthook/*.yml
+  - lefthook/lint.yml
+  - lefthook/commit-msg.yml
+  - lefthook/files.yml
