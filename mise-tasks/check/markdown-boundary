@@ -1,0 +1,38 @@
+#!/usr/bin/env bash
+#MISE description="Verify rumdl lint/format boundary behavior"
+set -euo pipefail
+
+readonly project_root="${MISE_PROJECT_ROOT:?MISE_PROJECT_ROOT must be set by mise}"
+readonly expected_file="$project_root/tests/fixtures/markdown-boundary.md"
+readonly temp_file="$(mktemp --suffix=.md)"
+trap 'rm -f "$temp_file"' EXIT
+
+cp "$project_root/tests/fixtures/markdown-boundary-input.txt" "$temp_file"
+# The production formatter flags must remain present at every call site.
+call_sites=$(grep -l 'rumdl fmt' \
+  "$project_root/lefthook/lint.yml" \
+  "$project_root/mise-tasks/format/markdown" \
+  "$project_root/mise-tasks/check/markdown-format" | sort)
+test "$(printf '%s\n' "$call_sites" | wc -l)" -eq 3 || {
+  echo "ERROR: expected exactly three production rumdl fmt call sites" >&2
+  exit 1
+}
+for call_site in \
+  "$project_root/lefthook/lint.yml" \
+  "$project_root/mise-tasks/format/markdown" \
+  "$project_root/mise-tasks/check/markdown-format"; do
+  grep -Eq -- '--extend-enable MD029,MD060 --config .*[.]enabled = true' "$call_site"
+done
+
+mise exec -- rumdl fmt --silent --extend-enable MD029,MD060 --config 'MD060.enabled = true' -- "$temp_file"
+expected=$(cat "$expected_file")
+actual=$(cat "$temp_file")
+test "$actual" = "$expected" || { echo "ERROR: boundary formatter output changed" >&2; exit 1; }
+mise exec -- rumdl check --deny-config-warnings -- "$temp_file"
+
+cp "$project_root/tests/fixtures/markdown-boundary-input.txt" "$temp_file"
+# Removing the override must make the production formatter check fail on MD029.
+if mise exec -- rumdl fmt --check -- "$temp_file"; then
+  echo "ERROR: removing the formatter override did not fail the dual-rule fixture" >&2
+  exit 1
+fi

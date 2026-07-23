@@ -22,3 +22,6 @@ jobs:
 
       - name: Run linters
         run: mise run lint
+
+      - name: Verify rumdl formatter boundary
+        run: mise run check:markdown-boundary

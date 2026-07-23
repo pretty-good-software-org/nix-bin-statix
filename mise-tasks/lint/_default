@@ -4,6 +4,6 @@ set -euo pipefail
 
 mise run check:markdown-format
 mise run lint:actionlint
-mise run lint:markdownlint
+mise run lint:markdown
 mise run lint:yamllint
 mise run lint:tool-json
