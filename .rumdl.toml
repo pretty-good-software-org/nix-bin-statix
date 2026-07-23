@@ -19,6 +19,7 @@ reflow = true
 reflow-mode = "default"
 length-mode = "visual"
 code-blocks = false
+tables = false
 code-spans = false
 headings = false
 
