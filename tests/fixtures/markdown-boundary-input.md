@@ -3,6 +3,6 @@
 1. first
 3. second
 
-| a | longer |
-| - | ------ |
-| x | y |
+| a   | longer |
+| --- | ------ |
+| x   | y      |
