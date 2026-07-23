@@ -143,10 +143,6 @@ url = "https://github.com/jqlang/jq/releases/download/jq-1.8.2/jq-macos-amd64"
 url_api = "https://api.github.com/repos/jqlang/jq/releases/assets/453012782"
 provenance = "github-attestations"
 
-[[tools.markdownlint-cli2]]
-version = "0.22.0"
-backend = "npm:markdownlint-cli2"
-
 [[tools.python]]
 version = "3.10.18"
 backend = "core:python"

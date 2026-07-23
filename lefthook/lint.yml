@@ -17,10 +17,10 @@ pre-commit:
       run: rumdl fmt --check -- {staged_files}
       fail_text: "rumdl found formatting issues"
 
-    markdownlint:
+    markdown:
       glob: "**/*.md"
-      run: markdownlint-cli2 {staged_files}
-      fail_text: "markdownlint found issues"
+      run: rumdl check --deny-config-warnings -- {staged_files}
+      fail_text: "rumdl found issues"
 
     tool-json:
       glob: "tool.json"
