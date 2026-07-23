@@ -9,7 +9,7 @@ trap 'rm -f "$temp_file"' EXIT
 
 cp "$project_root/tests/fixtures/markdown-boundary-input.txt" "$temp_file"
 # The production formatter flags must remain present at every call site.
-call_sites=$(rg -l 'rumdl fmt' \
+call_sites=$(grep -l 'rumdl fmt' \
   "$project_root/lefthook/lint.yml" \
   "$project_root/mise-tasks/format/markdown" \
   "$project_root/mise-tasks/check/markdown-format" | sort)
@@ -21,7 +21,7 @@ for call_site in \
   "$project_root/lefthook/lint.yml" \
   "$project_root/mise-tasks/format/markdown" \
   "$project_root/mise-tasks/check/markdown-format"; do
-  rg -q -- '--extend-enable MD029,MD060 --config .*[.]enabled = true' "$call_site"
+  grep -Eq -- '--extend-enable MD029,MD060 --config .*[.]enabled = true' "$call_site"
 done
 
 mise exec -- rumdl fmt --silent --extend-enable MD029,MD060 --config 'MD060.enabled = true' -- "$temp_file"
